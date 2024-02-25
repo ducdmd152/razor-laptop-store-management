@@ -1,0 +1,68 @@
+﻿@page
+@model MyShopRazorPages.Pages.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Product Management";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="mb-0">Product List</h1>
+    <p class="mt-4">
+        <a class="btn btn-primary" asp-page="Create">Create New</a>
+    </p>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Status</th>                
+                <th>Category</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Product)
+            {
+                <tr>
+                    <td><img src="@item.Image" alt="Product Image" style="width: 140px; height: 100px; object-fit: contain;" /></td>
+                    <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;">@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td style="max-width: 240px; overflow: hidden; text-overflow: ellipsis;">
+                        @Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Category.Name)</td>
+                    <td wid>
+                        <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-info" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                        <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<nav aria-label="Page navigation" style="display: flex; justify-content: center;">
+    <ul class="pagination">
+        @for (var i = 1; i <= @Model.LastPageIndex; i++)
+        {
+            <li class="page-item @(Model.PageIndex == i ? "active" : "")">
+                <a class="page-link" href="?pageIndex=@i">@i</a>
+            </li>
+        }
+    </ul>
+</nav>
+
+<script src="./js/bootstrap.min.js" />

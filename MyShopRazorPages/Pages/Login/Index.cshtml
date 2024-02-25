@@ -1,0 +1,32 @@
+﻿@page
+@model MyShopRazorPages.Pages.Login.IndexModel
+@{
+}
+
+<div class="d-flex justify-content-center">
+    <div>
+        <div class="h1 text-center">LOGIN</div>
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <form method="post" class="d-flex flex-column align-items-center" style="width: 240px">
+            <div class="mb-1" style="width: 100%">
+                <label class="d-block">Email: </label>
+                <input asp-for="Credential.User" type="text " style="width: 100%" />
+                <span class="text-danger" asp-validation-for="Credential.User"></span>
+            </div>
+            
+            <div class="mb-1" style="width: 100%">
+                <label class="d-block">Password: </label>
+                <input asp-for="Credential.Password" type="password" style="width: 100%" />
+                <span class="text-danger" asp-validation-for="Credential.Password"></span>
+            </div>
+
+            @if (Model.ErrorString != "")
+            {
+                <div class="text-danger mt-2">@Model.ErrorString</div>
+            }
+
+            <input type="submit" name="action" value="Login" class="btn btn-primary mt-2"/>
+        </form>
+        
+    </div>
+</div>
