@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyShopManagementRepository"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyShopManagementService", "MyShopManagementService\MyShopManagementService.csproj", "{3DA9C3E0-6F79-4BA9-B14F-4162B5601C89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyShopRazorPages", "MyShopRazorPages\MyShopRazorPages.csproj", "{8AA2D35F-5373-4859-805D-1BC9BB44B074}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyShopRazorPages", "MyShopRazorPages\MyShopRazorPages.csproj", "{8AA2D35F-5373-4859-805D-1BC9BB44B074}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

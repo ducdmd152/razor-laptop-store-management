@@ -1,4 +1,19 @@
-﻿<!DOCTYPE html>
+﻿@using MyShopManagementBO;
+@using Newtonsoft.Json;
+@using Microsoft.AspNetCore.Http;
+@{
+	var httpContext = ViewContext.HttpContext;	
+	var userString = httpContext.Session.GetString("CREDENTIAL");
+	var user = userString != null ? JsonConvert.DeserializeObject<User>(userString) : null;
+	ViewData["User"] = user;
+	string role = null;
+	@if (user != null)
+	{
+		ViewData["Name"] = user.Name;
+		role = user.Role.Name.ToUpper();
+	}
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,21 +27,100 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">MyShopRazorPages</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Laptop Store</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+                </button>					
+					@if (role == null)
+					{
+						<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+							<ul class="navbar-nav flex-grow-1">
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+								</li>								
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+								</li>
+							</ul>
+						</div>
+						<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+							<ul class="navbar-nav flex-grow-1 justify-content-end">
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-page="/Login/Index">Login</a>
+							</li>
+							</ul>
+						</div>
+					}
+					else if (role.Equals("ADMIN"))
+					{
+						<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+							<ul class="navbar-nav flex-grow-1">
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+								</li>
+								<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-page="/Accounts">Account Management</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-page="/Profile">My Profile</a>
+								</li>
+							</ul>
+						</div>
+						<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+							<ul class="navbar-nav flex-grow-1 justify-content-end">
+								<p class="nav-link " style="color: green">Hello admin, @ViewBag.Name</p>
+								<a class="nav-link text-dark" asp-area="" asp-page="/Logout/Index">Logout</a>
+							</ul>
+
+						</div>
+					}
+					else if (role.Equals("STAFF"))
+					{
+						<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+							<ul class="navbar-nav flex-grow-1">
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-page="/Products">Product Management</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-page="/Profile">My Profile</a>
+								</li>
+							</ul>
+						</div>
+						<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+							<ul class="navbar-nav flex-grow-1 justify-content-end">
+								<p class="nav-link " style="color: green">Hello staff, @ViewBag.Name</p>
+								<a class="nav-link text-dark" asp-area="" asp-page="/Logout/Index">Logout</a>
+							</ul>
+
+						</div>
+					}
+				else if (role.Equals("CUSTOMER"))
+				{
+					<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+						<ul class="navbar-nav flex-grow-1">
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-page="/Shop">Shop</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-page="/Profile">My Profile</a>
+							</li>
+						</ul>
+					</div>
+					<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+						<ul class="navbar-nav flex-grow-1 justify-content-end">
+							<p class="nav-link " style="color: green">Welcome, @ViewBag.Name</p>
+							<a class="nav-link text-dark" asp-area="" asp-page="/Logout/Index">Logout</a>
+						</ul>
+
+					</div>
+				}
             </div>
         </nav>
     </header>

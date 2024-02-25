@@ -1,5 +1,6 @@
 using MyShopManagementRepository;
 using MyShopManagementService;
+using MyShopRazorPages.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,7 @@ app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthorizationMiddleware();
 
 app.MapRazorPages();
 

@@ -56,13 +56,18 @@ namespace MyShopRazorPages.Pages.Login
                 {
                     if (account.Enabled)
                     {
-						HttpContext.Session.SetString("CREDENTIAL", JsonConvert.SerializeObject(account));
-						HttpContext.Session.SetString("Role", account.Role.Name.ToUpper());
-						return RedirectToPage("/Shop/Index");
+						HttpContext.Session.SetString("CREDENTIAL", 
+                            JsonConvert.SerializeObject(account, new JsonSerializerSettings
+                            {
+                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                            })
+                         );
+						HttpContext.Session.SetString("ROLE", account.Role.Name.ToUpper());
+						return RedirectToPage("/Index");
 					}
                     else
                     {
-						return RedirectToPage("/Login/Index", new { error = 1, user = Credential.User });
+						return RedirectToPage("/Login", new { error = 1, user = Credential.User });
 					}
                 }
                 else
