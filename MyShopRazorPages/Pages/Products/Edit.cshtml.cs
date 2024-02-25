@@ -7,35 +7,42 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyShopManagementBO;
+using MyShopManagementService;
 
 namespace MyShopRazorPages.Pages.Products
 {
     public class EditModel : PageModel
     {
-        private readonly MyShopManagementBO.MyShopContext _context;
+        private readonly IProductService productService;
 
-        public EditModel(MyShopManagementBO.MyShopContext context)
+        public EditModel(IProductService productService)
         {
-            _context = context;
+            this.productService = productService;
         }
 
         [BindProperty]
         public Product Product { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || productService.GetAll() == null)
             {
                 return NotFound();
             }
 
-            var product =  await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
+            if (!int.TryParse(id, out int productId))
             {
                 return NotFound();
             }
-            Product = product;
-           ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+
+            var item = productService.Get(productId);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            Product = item;
+            ViewData["CategoryId"] = new SelectList(productService.GetCategories(), "Id", "Name");
             return Page();
         }
 
@@ -47,31 +54,20 @@ namespace MyShopRazorPages.Pages.Products
             {
                 return Page();
             }
-
-            _context.Attach(Product).State = EntityState.Modified;
-
+            ViewData["CategoryId"] = new SelectList(productService.GetCategories(), "Id", "Name");
             try
             {
-                await _context.SaveChangesAsync();
+                productService.Update(Product);
             }
-            catch (DbUpdateConcurrencyException)
+            catch
             {
-                if (!ProductExists(Product.Id))
+                if (productService.Exist(Product.Id) == false)
                 {
                     return NotFound();
-                }
-                else
-                {
-                    throw;
                 }
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool ProductExists(int id)
-        {
-          return (_context.Products?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

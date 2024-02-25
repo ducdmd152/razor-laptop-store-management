@@ -15,6 +15,6 @@ namespace MyShopManagementBO
 
         public string Image { get; set; }
 
-        public virtual Category Category { get; set; } = null!;
+        public virtual Category? Category { get; set; }
     }
 }

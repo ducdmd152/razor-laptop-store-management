@@ -6,38 +6,48 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MyShopManagementBO;
+using MyShopManagementService;
 
 namespace MyShopRazorPages.Pages.Products
 {
     public class CreateModel : PageModel
     {
-        private readonly MyShopManagementBO.MyShopContext _context;
+        private readonly IProductService productService;
 
-        public CreateModel(MyShopManagementBO.MyShopContext context)
+        public CreateModel(IProductService productService)
         {
-            _context = context;
+            this.productService = productService;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+            // select box forward data
+            ViewData["CategoryId"] = new SelectList(productService.GetCategories(), "Id", "Name");
             return Page();
         }
 
         [BindProperty]
         public Product Product { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Products == null || Product == null)
+            // select box forward data
+            ViewData["CategoryId"] = new SelectList(productService.GetCategories(), "Id", "Name");
+
+            if (!ModelState.IsValid || productService.GetAll() == null || Product == null)
             {
                 return Page();
             }
 
-            _context.Products.Add(Product);
-            await _context.SaveChangesAsync();
+            if (productService.Exist(Product.Id))
+            {
+                ModelState.AddModelError("Product.Id", "Product ID already exists.");
+                return Page();
+            }
+
+            productService.Create(Product);
 
             return RedirectToPage("./Index");
         }

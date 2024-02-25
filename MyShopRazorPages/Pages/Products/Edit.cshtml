@@ -2,12 +2,12 @@
 @model MyShopRazorPages.Pages.Products.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Product";
 }
 
-<h1>Edit</h1>
+<h1>@ViewBag.Title</h1>
 
-<h4>Product</h4>
+<h4>@Model.Product.Name</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -34,25 +34,28 @@
                 <input asp-for="Product.Price" class="form-control" />
                 <span asp-validation-for="Product.Price" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
+            <div class="form-group form-check mt-2">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Product.Status" /> @Html.DisplayNameFor(model => model.Product.Status)
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="Product.CategoryId" class="control-label"></label>
+                <label asp-for="Product.Category" class="control-label"></label>
                 <select asp-for="Product.CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
                 <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Product.Image" class="control-label"></label>
-                <input asp-for="Product.Image" class="form-control" />
+                <input asp-for="Product.Image" class="form-control" id="imageUrl" />
                 <span asp-validation-for="Product.Image" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+    </div>
+    <div class="col-md-6">
+        <img id="productImage" src="@Model.Product.Image" alt="Product Image" class="img-fluid" style="max-height: 360px; margin-left: 120px;"  />
     </div>
 </div>
 
@@ -61,5 +64,12 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.getElementById('imageUrl').addEventListener('input', function () {
+            document.getElementById('productImage').src = this.value;
+        });
+    </script>
 }
