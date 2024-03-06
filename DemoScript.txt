@@ -2,14 +2,13 @@
 1. Introduction
 2. DB Overview
 3. Actors & Features Demo
+
 +) Login & Logout
-+) Customer:
-	- View products in shop
-	- View own profile
-+) Manager:
-	- Manage (CRUD) product in shop
-	- View own profile
-+) Admin:
-	- Manage (CRUD) account in shop
-	- View own profile
+
++) Customer: View products (details also) in shop
+
++) Manager: Manage (CRUD) product in shop
+
++) Admin: Manage (CRUD) account in shop
+
 +) Validation

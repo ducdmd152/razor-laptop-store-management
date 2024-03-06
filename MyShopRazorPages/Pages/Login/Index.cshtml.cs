@@ -67,7 +67,7 @@ namespace MyShopRazorPages.Pages.Login
 					}
                     else
                     {
-						return RedirectToPage("/Login", new { error = 1, user = Credential.User });
+						return RedirectToPage("/Login/Index", new { error = 1, user = Credential.User });
 					}
                 }
                 else

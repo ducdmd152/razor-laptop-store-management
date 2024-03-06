@@ -62,9 +62,10 @@ ALTER DATABASE [MyShop] SET ACCELERATED_DATABASE_RECOVERY = OFF
 GO
 ALTER DATABASE [MyShop] SET QUERY_STORE = OFF
 GO
+
 USE [MyShop]
 GO
-/****** Object:  Table [dbo].[Category]    Script Date: 2/21/2024 8:50:42 AM ******/
+/****** Object:  Table [dbo].[Category]    Script Date: 3/6/2024 11:29:34 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -78,7 +79,7 @@ CREATE TABLE [dbo].[Category](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Product]    Script Date: 2/21/2024 8:50:42 AM ******/
+/****** Object:  Table [dbo].[Product]    Script Date: 3/6/2024 11:29:34 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -98,7 +99,7 @@ CREATE TABLE [dbo].[Product](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Role]    Script Date: 2/21/2024 8:50:42 AM ******/
+/****** Object:  Table [dbo].[Role]    Script Date: 3/6/2024 11:29:34 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -112,7 +113,7 @@ CREATE TABLE [dbo].[Role](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[User]    Script Date: 2/21/2024 8:50:42 AM ******/
+/****** Object:  Table [dbo].[User]    Script Date: 3/6/2024 11:29:34 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -153,6 +154,14 @@ INSERT [dbo].[Product] ([ID], [Name], [Description], [Quantity], [Price], [Statu
 GO
 INSERT [dbo].[Product] ([ID], [Name], [Description], [Quantity], [Price], [Status], [CategoryID], [Image]) VALUES (9, N'Laptop Lenovo Thinkpad P52', N'Core i7-8850H, Ram 32GB, SSD 512GB, 15.6 Inch FHD, Nvidia Quadro P3200', 40, 600, 1, 1, N'https://hungthinhhitech.vn/uploads/product/LAPTOP/LENOVO/laptop-lenovo-thinkpad-p52-core-i7-8850h-1.jpg')
 GO
+INSERT [dbo].[Product] ([ID], [Name], [Description], [Quantity], [Price], [Status], [CategoryID], [Image]) VALUES (12, N'LG Gram 14 inch 2022 - (i7/16GB/512GB/FHD) - USED', N'CPU: Intel 12th Gen Core i7-1260P (12 Cores, 16 Threads, Upto 4.7GHz, 18MB Cache) RAM: 16GB LPDDR5 5200MHz', 100, 708, 1, 2, N'https://laptopvang.com/wp-content/uploads/2022/06/Dell-XPS-9315-2022-13-inch-Sky-laptopvang-1-900x900.png')
+GO
+INSERT [dbo].[Product] ([ID], [Name], [Description], [Quantity], [Price], [Status], [CategoryID], [Image]) VALUES (13, N'Asus Zenbook 14 UX3402ZA (2022)', N'Core™ i5-1240P, RAM 8GB, SSD 512GB, 2.8K(No.3396)', 125, 700, 1, 1, N'https://lapvip.vn/upload/products/original/asus-zenbook-14-ux3402za-lapvip-1-1677924970.jpg')
+GO
+INSERT [dbo].[Product] ([ID], [Name], [Description], [Quantity], [Price], [Status], [CategoryID], [Image]) VALUES (14, N'LG Gram 14 inch 2022 - (i7/16GB/512GB/FHD)', N' Intel 12th Gen Core i7-1260P (12 Cores, 16 Threads, Upto 4.7GHz, 18MB Cache)', 200, 710, 1, 2, N'https://laptopvang.com/wp-content/uploads/2023/01/lg_gram_14_inch_2022_black_laptopvang_2-900x900.png')
+GO
+INSERT [dbo].[Product] ([ID], [Name], [Description], [Quantity], [Price], [Status], [CategoryID], [Image]) VALUES (15, N'Dell XPS 15 9500', N'Intel Core i7-10750H (12MB Smart Cache, 2.60 GHz up to 5.0 GHz, 6 cores, 12 threads)', 200, 970, 1, 2, N'https://laptops.vn/uploads/dell_xps_15_9500_1697085410_640.png')
+GO
 SET IDENTITY_INSERT [dbo].[Product] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Role] ON 
@@ -167,7 +176,11 @@ SET IDENTITY_INSERT [dbo].[Role] OFF
 GO
 INSERT [dbo].[User] ([Email], [Name], [Password], [Address], [Phone], [Enabled], [RoleID]) VALUES (N'admin@gmail.com', N'Admin', N'123456', N'Sai Gon', N'0943487783', 1, 3)
 GO
-INSERT [dbo].[User] ([Email], [Name], [Password], [Address], [Phone], [Enabled], [RoleID]) VALUES (N'duyduc@gmail.com', N'Duy Duc', N'123456', N'Sai Gon', N'0934968395', 1, 1)
+INSERT [dbo].[User] ([Email], [Name], [Password], [Address], [Phone], [Enabled], [RoleID]) VALUES (N'anhminh@gmail.com', N'Anh Minh', N'123456', N'Sai Gon', N'0934968567', 1, 2)
+GO
+INSERT [dbo].[User] ([Email], [Name], [Password], [Address], [Phone], [Enabled], [RoleID]) VALUES (N'duyduc@gmail.com', N'Duy Duc', N'123456', N'Sai Gon', N'0934968395', 0, 1)
+GO
+INSERT [dbo].[User] ([Email], [Name], [Password], [Address], [Phone], [Enabled], [RoleID]) VALUES (N'hanan@gami.com', N'Ha An', N'321313', N'Ha Noi', N'0943487788', 1, 1)
 GO
 INSERT [dbo].[User] ([Email], [Name], [Password], [Address], [Phone], [Enabled], [RoleID]) VALUES (N'manager@gmail.com', N'Manager', N'123456', N'Sai Gon', N'0934986423', 1, 2)
 GO

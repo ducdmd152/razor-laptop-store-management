@@ -25,8 +25,8 @@ namespace MyShopRazorPages.Pages.Products
 
 		public async Task OnGetAsync(int pageIndex = 1, int pageSize = 3)
 		{
-			List<Product> allOfItems = productService.GetAll().ToList();
-			//allOfItems.Reverse();
+			List<Product> allOfItems = productService.GetAll().Where(item => item.Status).ToList();
+			allOfItems.Reverse();
 
 			PageIndex = pageIndex;
 			int numberOfItems = allOfItems.Count;
