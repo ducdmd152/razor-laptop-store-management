@@ -51,8 +51,7 @@ namespace MyShopRazorPages.Middlewares
         {
             string path = context.Request.Path.ToString().ToLower();
             return path == "" || path == "/"
-                || path.StartsWith("/home")
-                || path.StartsWith("/shop")
+                || path.StartsWith("/home")                
                 || path.StartsWith("/login");
         }
 

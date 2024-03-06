@@ -1,0 +1,30 @@
+﻿@page
+@model MyShopRazorPages.Pages.Shop.DetailsModel
+
+@{
+    ViewData["Title"] = @Model.Product.Name;
+}
+
+<div class="d-flex justify-content-between align-items-center">
+    <h1>@Model.Product.Name</h1>
+    <div>
+        <a asp-page="./Index" class="btn-secondary">Back to List</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@Model.Product.Image" alt="Product Image" style="max-width: 100%; height: 360px; object-fit: cover">
+        </div>
+        <div class="col-md-8">
+            <h4 class="mt-4">Price:<strong style="color: darkorange"> $@Model.Product.Price</strong> </h4>
+            <h4 class="mt-4">Available:<strong style="color: darkslateblue"> @Model.Product.Quantity</strong> </h4>
+            <p class="mt-4" style="background: black; color: white; border-radius: 8px; width: fit-content; padding:8px;"><strong> @Model.Product.Category?.Name</strong></p>          
+            <p class="mt-4"><strong>Description:</strong></p>
+            <pclass="mt-4">@Model.Product.Description</p>
+        </div>
+    </div>
+</div>
+
+
