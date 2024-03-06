@@ -26,7 +26,7 @@ namespace MyShopRazorPages.Middlewares
             if (isAuthenticated)
             {
                 
-                if (user != null && AllowForRole(context, user.RoleId))
+                if (AllowForRole(context, user.RoleId))
                 {
                     await _next(context);
                     return;
@@ -66,7 +66,7 @@ namespace MyShopRazorPages.Middlewares
                         || path.StartsWith("/accounts")
                         || path.StartsWith("/profile")
                         || path.StartsWith("/logout");
-                case (int)Roles.STAFF:
+                case (int)Roles.MANAGER:
                     return path == "" || path == "/"
                         || path.StartsWith("/products")
                         || path.StartsWith("/profile")

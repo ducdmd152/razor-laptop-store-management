@@ -69,13 +69,13 @@
 						</div>
 						<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 							<ul class="navbar-nav flex-grow-1 justify-content-end">
-								<p class="nav-link " style="color: green">Hello admin, @ViewBag.Name</p>
+								<p class="nav-link " style="color: green">Hello, @ViewBag.Name</p>
 								<a class="nav-link text-dark" asp-area="" asp-page="/Logout/Index">Logout</a>
 							</ul>
 
 						</div>
 					}
-					else if (role.Equals("STAFF"))
+					else if (role.Equals("MANAGER"))
 					{
 						<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 							<ul class="navbar-nav flex-grow-1">
@@ -83,7 +83,7 @@
 									<a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link text-dark" asp-area="" asp-page="/Products">Product Management</a>
+									<a class="nav-link text-dark" asp-area="" asp-page="/Products/Index">Product Management</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link text-dark" asp-area="" asp-page="/Profile">My Profile</a>
@@ -92,7 +92,7 @@
 						</div>
 						<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 							<ul class="navbar-nav flex-grow-1 justify-content-end">
-								<p class="nav-link " style="color: green">Hello staff, @ViewBag.Name</p>
+								<p class="nav-link " style="color: green">Welcome @ViewBag.Name</p>
 								<a class="nav-link text-dark" asp-area="" asp-page="/Logout/Index">Logout</a>
 							</ul>
 
