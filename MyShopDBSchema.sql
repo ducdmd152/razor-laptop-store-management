@@ -178,7 +178,7 @@ INSERT [dbo].[User] ([Email], [Name], [Password], [Address], [Phone], [Enabled],
 GO
 INSERT [dbo].[User] ([Email], [Name], [Password], [Address], [Phone], [Enabled], [RoleID]) VALUES (N'anhminh@gmail.com', N'Anh Minh', N'123456', N'Sai Gon', N'0934968567', 1, 2)
 GO
-INSERT [dbo].[User] ([Email], [Name], [Password], [Address], [Phone], [Enabled], [RoleID]) VALUES (N'duyduc@gmail.com', N'Duy Duc', N'123456', N'Sai Gon', N'0934968395', 0, 1)
+INSERT [dbo].[User] ([Email], [Name], [Password], [Address], [Phone], [Enabled], [RoleID]) VALUES (N'duyduc@gmail.com', N'Duy Duc', N'123456', N'Sai Gon', N'0934968395', 1, 1)
 GO
 INSERT [dbo].[User] ([Email], [Name], [Password], [Address], [Phone], [Enabled], [RoleID]) VALUES (N'hanan@gami.com', N'Ha An', N'321313', N'Ha Noi', N'0943487788', 1, 1)
 GO
